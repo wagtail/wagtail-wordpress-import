@@ -338,14 +338,7 @@ def author_processor(imported_pages, data_tag, tags_cache):
 ```python
 # A sample page model thats has a header image field
 
-# The imports below assume you are using Wagtail v3.0+
-
-# Wagtail < 3.0
-# from wagtail.core.models import Page
 from wagtail.models import Page
-
-# Wagtail < 3.0
-# from wagtail.admin.edit
 from wagtail.admin.panels import FieldPanel
 
 
@@ -362,8 +355,6 @@ class PostPage(WPImportedPageMixin, Page):
     # ...
     content_panels = Page.content_panels + [
         # ...
-        # Wagtail < 3.0
-        # SnippetChooserPanel("author"),
         FieldPanel("author")
         # ...
     ]

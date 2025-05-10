@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
-from wagtail import VERSION as WAGTAIL_VERSION
-
 # Build paths inside the project like this: os.path.join(PROJECT_DIR, ...)
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -30,8 +28,6 @@ DEBUG = True
 ALLOWED_HOSTS = ["localhost", "testserver"]
 
 # Application definition
-
-WAGTAIL_CORE = "wagtail" if WAGTAIL_VERSION >= (3, 0) else "wagtail.core"
 
 INSTALLED_APPS = [
     "wagtail_wordpress_import",
@@ -51,7 +47,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.routable_page",
     "wagtail.contrib.styleguide",
     "wagtail.sites",
-    WAGTAIL_CORE,
+    "wagtail",
     "taggit",
     "rest_framework",
     "django.contrib.admin",
@@ -166,7 +162,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 WAGTAIL_SITE_NAME = "Wagtail xmlimport test site"
 
-if WAGTAIL_VERSION >= (3, 0):
-    WAGTAILADMIN_BASE_URL = "http://localhost:8000"
+WAGTAILADMIN_BASE_URL = "http://localhost:8000"
 
 WAGTAIL_WORDPRESS_IMPORTER_SOURCE_DOMAIN = "http://example.com"
