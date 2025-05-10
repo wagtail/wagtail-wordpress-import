@@ -48,7 +48,7 @@ class BlockBuilder:
         removee_tags = config_promote_child_tags["PARENTS_TO_REMOVE"]
 
         for promotee in promotee_tags:
-            promotees = self.soup.findAll(promotee)
+            promotees = self.soup.find_all(promotee)
             for promotee in promotees:
                 if promotee.parent.name in removee_tags:
                     promotee.parent.replace_with(promotee)

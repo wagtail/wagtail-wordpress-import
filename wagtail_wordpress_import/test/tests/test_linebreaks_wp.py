@@ -18,7 +18,7 @@ class TestLinebreaks(TestCase):
         self.soup = BeautifulSoup(filter_linebreaks_wp(self.stream), "html.parser")
 
     def test_linebreaks_wp(self):
-        p_tags = self.soup.findAll("p")
+        p_tags = self.soup.find_all("p")
         self.assertEqual(len(p_tags), 7)
 
     def test_simple_string(self):
@@ -28,7 +28,7 @@ class TestLinebreaks(TestCase):
 
         line 3"""
         soup = BeautifulSoup(filter_linebreaks_wp(input), "html.parser")
-        paragraphs = soup.findAll("p")
+        paragraphs = soup.find_all("p")
 
         self.assertEqual(len(paragraphs), 3)
         for i in range(len(paragraphs)):

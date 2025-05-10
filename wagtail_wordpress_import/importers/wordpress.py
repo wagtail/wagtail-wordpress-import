@@ -287,7 +287,7 @@ class WordpressImporter:
         save to the log.
         """
         soup = BeautifulSoup(block["value"], "html.parser")
-        links = soup.findAll("a")
+        links = soup.find_all("a")
 
         for link in links:
             page_link = self.get_page(link.attrs.get("href"), page)
