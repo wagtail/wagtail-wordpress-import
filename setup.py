@@ -43,12 +43,12 @@ setup(
     install_requires=[
         "Django>=4.2",
         "Wagtail>=6.3",
-        "lxml>=4.7",
-        "bleach>=4.1,<4.2",
-        "prettytable>=2.2,<2.3",
-        "shortcodes>=5.1,<6.0",
-        "cached-property>=1.5.1,<2.0",
-        "html5lib>=1.1,<2.0",
+        "lxml>=5.4.0,<6",
+        "bleach>=4.1.0,<5",
+        "prettytable>=3.16.0,<4",
+        "shortcodes>=5.4.0,<6",
+        "cached-property>=2.0.1,<3",
+        "html5lib>=1.1,<2",
     ],
     extras_require={
         "testing": [
