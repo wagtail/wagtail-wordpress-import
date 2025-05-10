@@ -44,7 +44,7 @@ setup(
     install_requires=[
         "Django>=3.2",
         "Wagtail>=2.15",
-        "lxml>=4.7,<4.8",
+        "lxml>=4.7",
         "bleach>=4.1,<4.2",
         "prettytable>=2.2,<2.3",
         "shortcodes>=5.1,<6.0",
@@ -55,7 +55,7 @@ setup(
             "freezegun==0.3.15",
             "responses>=0.16.0,<0.17.0",
             "flake8==5.0.4",
-            "isort==5.10.1",
+            "isort==6.0.1",
             "black==22.10.0",
         ],
     },
