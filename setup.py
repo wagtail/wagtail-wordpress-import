@@ -44,6 +44,7 @@ setup(
         "prettytable>=2.2,<2.3",
         "shortcodes>=5.1,<6.0",
         "cached-property>=1.5.1,<2.0",
+        "html5lib>=1.1,<2.0",
     ],
     extras_require={
         "testing": [
