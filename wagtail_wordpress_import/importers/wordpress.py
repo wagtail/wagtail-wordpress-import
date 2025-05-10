@@ -2,8 +2,6 @@ import copy
 import json
 from datetime import datetime
 
-from wagtail import VERSION as WAGTAIL_VERSION
-
 try:
     from functools import cached_property
 except ImportError:
@@ -17,11 +15,7 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 from django.utils.text import slugify
 from django.utils.timezone import make_aware
-
-if WAGTAIL_VERSION >= (3, 0):
-    from wagtail.models import Page
-else:
-    from wagtail.core.models import Page
+from wagtail.models import Page
 
 from wagtail_wordpress_import.block_builder import BlockBuilder
 from wagtail_wordpress_import.functions import (
