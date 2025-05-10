@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
+from django import get_version
+
+DJANGO_VERSION = get_version()
+
 # Build paths inside the project like this: os.path.join(PROJECT_DIR, ...)
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -136,7 +140,10 @@ TIME_ZONE = "UTC"
 
 USE_I18N = True
 
-USE_L10N = True
+# RemovedInDjango50Warning:
+# https://docs.djangoproject.com/en/5.2/releases/5.0/#features-removed-in-5-0
+if not DJANGO_VERSION >= "5.0":
+    USE_L10N = True
 
 USE_TZ = True
 
