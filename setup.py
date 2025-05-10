@@ -43,7 +43,7 @@ setup(
     install_requires=[
         "Django>=4.2",
         "Wagtail>=6.3",
-        "lxml>=5.4.0,<6",
+        "lxml>=5.3.0,<5.4",
         "bleach>=4.1.0,<5",
         "prettytable>=3.16.0,<4",
         "shortcodes>=5.4.0,<6",
