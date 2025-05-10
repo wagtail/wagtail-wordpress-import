@@ -25,7 +25,7 @@ class Category(models.Model):
 
 class TestPage(WPImportedPageMixin, Page):
 
-    body = StreamField(WPImportStreamBlocks)
+    body = StreamField(WPImportStreamBlocks, use_json_field=True)
 
     categories = ParentalManyToManyField(Category, blank=True)
 
