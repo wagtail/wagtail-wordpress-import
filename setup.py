@@ -53,7 +53,7 @@ setup(
         "testing": [
             "freezegun==0.3.15",
             "responses>=0.16.0,<0.17.0",
-            "flake8==5.0.4",
+            "flake8==7.2.0",
             "isort==6.0.1",
             "black==22.10.0",
         ],
