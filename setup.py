@@ -34,11 +34,11 @@ setup(
         "Framework :: Django",
         "Framework :: Django :: 4.2",
         "Framework :: Wagtail",
-        "Framework :: Wagtail :: 4",
+        "Framework :: Wagtail :: 5",
     ],
     install_requires=[
         "Django>=4.2,<4.3",
-        "Wagtail>=5.0,<5.1",
+        "Wagtail>=5.2,<5.3",
         "lxml>=4.7",
         "bleach>=4.1,<4.2",
         "prettytable>=2.2,<2.3",
