@@ -18,9 +18,9 @@ A package for Wagtail CMS to import WordPress blog content from an XML file into
 
 ## Requirements
 
-1. Wagtail CMS Installed with initial setup
-2. WordPress XML export of all content in a single file
-3. The WordPress website will need to be live and available for importing of assets such as images and documents.
+- Wagtail CMS Installed with initial setup
+- WordPress XML export of all content in a single file
+- The WordPress website will need to be live and available for importing of assets such as images and documents.
 
 ## Compatibility
 
@@ -30,24 +30,17 @@ The package has been developed and tested with:
 - Django: 4.2, 5.1, 5.2
 - Postgres and SQLite Databases
 
-`All code examples are for a site using Wagtail v4.1+` See [Wagtail release notes](https://docs.wagtail.org/en/stable/releases/4.1.html)
-
 ## Initial app and package setup
 
-1. Setup a Wagtail site using your preferred method or follow the [official documentation](https://docs.wagtail.io/en/stable/getting_started/tutorial.html) to get started.
-2. Install this package from PyPI:
+Setup a Wagtail site using your preferred method or follow the [official documentation](https://docs.wagtail.io/en/stable/getting_started/tutorial.html) to get started.
 
-   ```bash
-   # Using pip
-   pip install wagtail-wordpress-import
-   
-   # Using uv (recommended)
-   uv pip install wagtail-wordpress-import
-   ```
+Install this package `wagtail-wordpress-import`. You can install it using the package manager of your choice.
 
-3. Place your XML files somewhere on your disk. The file can have any name you choose.
-4. Create a `log` folder in the root of your site. The import script will need to write report files to this folder, you may need to set the permissions on the folder.
-5. Add `"wagtail_wordpress_import"` to your INSTALLED_APPS config in your settings.py file.
+Place the Wordpress XML file somewhere it can be found on your disk, you'll need to specify the path when using the import command.
+
+A `log` folder will be created in the root of your site. The import script will write .csv files to this folder, you should add `/log` to your `.gitignore` file as the files are not needed once the import is complete.
+
+Add `"wagtail_wordpress_import"` to your INSTALLED_APPS config in your settings.py file.
 
 ### Site URL for importing images and documents
 
@@ -58,7 +51,7 @@ The importer uses the [requests](https://docs.python-requests.org/en/latest/) li
 If the default settings are not suitable for your import, you can add the settings below to your own site settings and override the values.
 
 ```python
-# import package default settings
+# wagtail_wordpress_import package default settings are
 
 WAGTAIL_WORDPRESS_IMPORTER_REQUESTS_SETTINGS = {
     "headers": {"User-Agent": "WagtailWordpressImporter"},
@@ -81,16 +74,14 @@ from wagtail_wordpress_import.models import WPImportedPageMixin
 class PostPage(WPImportedPageMixin, Page): ...
 ```
 
-You will need to run `python manage.py makemigrations` and `python manage.py migrate` to add the fields to your page model.
-
-*It's intended that these fields are temporary for while importing, and can be removed once the content has been imported. [view source](wagtail_wordpress_import/models.py)*
+You will need to run `python manage.py makemigrations` and `python manage.py migrate` to add the `WPImportedPageMixin` fields to your page model. These fields are only used for debug and during the import process. Once the import is complete, you can remove the mixin from your page model if you don't need it anymore. You'll need run `python manage.py makemigrations` and `python manage.py migrate` again to remove the fields from your page model.
 
 #### A full example of the suggested page model class
 
 The import default is to import the `post` and `page` content types to an app called `app` and a model called `PostPage`. Keep that mind when you create your own page model.
 
 ```python
-# mysite/app/models.py
+# models.py
 
 from wagtail.admin.panels import (
     FieldPanel,
@@ -152,11 +143,13 @@ The most basic command would be:
 python manage.py import_xml path/to/xml/file.xml parent_page_id
 ```
 
-`parent_page_id` is the ID of the page in your Wagtail site where WordPress pages will be imported as children. You can find this in the Wagtail admin URL when editing the page e.g. for `http://www.domain.com/admin/pages/3/edit/` the ID is 3.
+`parent_page_id` is the ID of the page in your Wagtail site where WordPress pages will be imported as child pages. You can find this in the Wagtail admin URL when editing the page e.g. for `http://www.domain.com/admin/pages/3/edit/` the ID is 3.
 
 Running this command will import all WordPress 'post' and 'page' types to the 'PostPage' model in an app called 'pages'
 
-You can run the import as many times as you need. To avoid content duplication, subsequent imports after the first import will update the existing pages. This behavior also applies to any images or documents that have been imported.
+You can run the import as many times as you need. To avoid content duplication, subsequent imports after the first import will update the existing pages. This behavior also applies to any images or documents that have already been imported. New pages, images, and documents will be created if they don't already exist in the Wagtail site.
+
+The import process will create a log file in the `log` folder in the root of your site. The log file will contain information about the import process, including any errors that occurred during the import. *Currently the infomration in the CSV files is not very useful, but we are working on improving this.*
 
 ### Optional command arguments
 
