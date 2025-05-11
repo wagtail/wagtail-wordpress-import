@@ -1,0 +1,73 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wagtail-wordpress-import"
+version = "0.3.0"
+description = "Import XML data into wagtail to create pages and content"
+readme = "README.md"
+authors = [
+    { name = "Nick Moreton", email = "nickmoreton@me.com" }
+]
+license = { text = "BSD" }
+requires-python = ">=3.9"
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.1",
+    "Framework :: Django :: 5.2",
+    "Framework :: Wagtail",
+    "Framework :: Wagtail :: 6",
+    "Framework :: Wagtail :: 7",
+]
+dependencies = [
+    "Django>=4.2",
+    "Wagtail>=6.3",
+    "lxml>=5.3.0,<5.4",
+    "bleach>=4.1.0,<5",
+    "prettytable>=3.16.0,<4",
+    "shortcodes>=5.4.0,<6",
+    "cached-property>=2.0.1,<3",
+    "html5lib>=1.1,<2",
+]
+
+[project.urls]
+Homepage = "https://github.com/torchbox/wagtail-wordpress-import"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/wagtail_wordpress_import"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/wagtail_wordpress_import",
+    "LICENSE",
+    "*.rst",
+    "*.txt",
+    "*.md",
+]
+exclude = [
+    "**/__pycache__",
+    "**/*.py[co]"
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+    "ruff>=0.11.9",
+]
+
+[project.optional-dependencies]
+testing = [
+    "coverage>=7.8.0",
+    "responses==0.25.7",
+]

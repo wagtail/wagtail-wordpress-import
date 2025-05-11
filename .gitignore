@@ -1,16 +1,85 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
 *.pyc
-/build
-/dist
-/wagtail_wordpress_import.egg-info
-/.coverage
-/htmlcov
-/.tox
-/venv
-/.vscode
-/site
-/test_wagtail_wordpress_import.db
-/node_modules
-/test-static
-/test-media
+.pytest_cache/
+pytest_cache/
+.ruff_cache/
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Testing
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+stats-*.json
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Django/Wagtail specific
+*.log
+db.sqlite3
+/media
+/static
+/staticfiles
+test_wagtail_wordpress_import.db
+tests-static/
+tests-media/
+
+# Node
+node_modules/
+package-lock.json
+yarn.lock
+
+# Docs
+site/
+
+# Mac OS
 .DS_Store
-/stats-*.json
+.AppleDouble
+.LSOverride
+
+# UV
+uv/
+.uv/
+.local/
+
+# Local development
+*_local_settings.py
+local_settings.py

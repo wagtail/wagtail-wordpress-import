@@ -1,7 +1,5 @@
 # Wagtail WordPress Import
 
-[![codecov](https://codecov.io/gh/torchbox/wagtail-wordpress-import/branch/main/graph/badge.svg?token=KFSTTxTGxZ)](https://codecov.io/gh/torchbox/wagtail-wordpress-import)
-
 A package for Wagtail CMS to import WordPress blog content from an XML file into Wagtail.
 
 - [Wagtail WordPress Import](#wagtail-wordpress-import)
@@ -37,8 +35,16 @@ The package has been developed and tested with:
 ## Initial app and package setup
 
 1. Setup a Wagtail site using your preferred method or follow the [official documentation](https://docs.wagtail.io/en/stable/getting_started/tutorial.html) to get started.
-2. Install this package from PyPi with `pip install wagtail-wordpress-import`
- or using any method you prefer.
+2. Install this package from PyPI:
+
+   ```bash
+   # Using pip
+   pip install wagtail-wordpress-import
+   
+   # Using uv (recommended)
+   uv pip install wagtail-wordpress-import
+   ```
+
 3. Place your XML files somewhere on your disk. The file can have any name you choose.
 4. Create a `log` folder in the root of your site. The import script will need to write report files to this folder, you may need to set the permissions on the folder.
 5. Add `"wagtail_wordpress_import"` to your INSTALLED_APPS config in your settings.py file.
@@ -181,6 +187,10 @@ We have included some developer commands to help you with importing large datase
 
 [View Developer Tooling](docs/tooling.md)
 
+### Development Setup
+
+If you're interested in contributing to the project or setting up a development environment, please see our [Development Guide](docs/development.md).
+
 ## Further Usage Examples
 
 - [Handling Specific HTML content structures](docs/examples.md)
@@ -189,7 +199,7 @@ We have included some developer commands to help you with importing large datase
 
 If you're a Python or Django developer, fork the repo and get stuck in!
 
-You might like to start by reviewing the [contributing guidelines](https://github.com/torchbox/wagtail-wordpress-import/wiki/Contributing-to-the-package) in the wiki and checking [current issues](https://github.com/torchbox/wagtail-wordpress-import/issues).
+Start by reviewing our [Development Guide](docs/development.md) for instructions on setting up your development environment. You might also want to check the [contributing guidelines](https://github.com/torchbox/wagtail-wordpress-import/wiki/Contributing-to-the-package) in the wiki and see the [current issues](https://github.com/torchbox/wagtail-wordpress-import/issues).
 
 ## Releases
 
