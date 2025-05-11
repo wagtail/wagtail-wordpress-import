@@ -1,4 +1,0 @@
-include LICENSE *.rst *.txt *.md
-graft wagtail_wordpress_import
-global-exclude __pycache__
-global-exclude *.py[co]
