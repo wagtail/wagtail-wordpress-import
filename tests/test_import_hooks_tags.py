@@ -50,9 +50,6 @@ class TestImportHooksXmlTagsPersisted(TestCase):
     dicts with keys foo and bar. Each dict should contain all XML tags and
     values from the fragment"""
 
-    def setUp(self):
-        self.logger = Logger("foo")
-
     def process_item(self, xml_stream):
         """Turn an XML stream into a node dict
         We expect there to be only one node in the XML stream.

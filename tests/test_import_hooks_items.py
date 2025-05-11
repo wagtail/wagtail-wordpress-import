@@ -50,9 +50,6 @@ class TestImportHooksXmlItemPersisted(TestCase):
     dicts with keys foo and bar. Each dict should contain all xml tags and
     values from the fragment"""
 
-    def setUp(self):
-        self.logger = Logger("foo")
-
     def process_item(self, xml_stream):
         """Turn an XML stream into a node dict
         This is duplicating a bunch of code from WordPressImporter. To test the ItemsCache
