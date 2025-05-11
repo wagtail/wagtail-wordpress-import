@@ -33,7 +33,7 @@ IMPORTER_RUN_PARAMS_TEST = {
 
 class WordpressItemTests(TestCase):
     def setUp(self):
-        self.logger = Logger("fakedir")
+        self.logger = Logger(LOG_DIR)
         body_html = """<p>Dummmy text</p><p>Dummmy text</p><p>Dummmy text</p>"""
         self.good_node = {
             "title": "Page Title",
@@ -247,7 +247,7 @@ class WordpressImporterTestsYoastMetaDescriptions(TestCase):
     ]
 
     def setUp(self):
-        self.logger = Logger("fakedir")
+        self.logger = Logger(LOG_DIR)
         xml_file = open(f"{FIXTURES_PATH}/post_meta.xml", "rb")
         xml_doc = pulldom.parse(xml_file)
         self.items_dict = []
@@ -308,7 +308,7 @@ class WordpressImporterTestsCleanWpPostMeta(TestCase):
     ]
 
     def setUp(self):
-        self.logger = Logger("fakedir")
+        self.logger = Logger(LOG_DIR)
         xml_file = open(f"{FIXTURES_PATH}/post_meta.xml", "rb")
         xml_doc = pulldom.parse(xml_file)
         self.items_dict = []

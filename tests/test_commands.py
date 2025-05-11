@@ -46,7 +46,7 @@ class TestImportXmlCommandNoConfig(TestCase):
 @override_settings(
     WAGTAIL_WORDPRESS_IMPORTER_SOURCE_DOMAIN="http://www.example.com",
 )
-class TestImportXmlCommandWithConfig(TestCase):
+class TestImportXmlCommandWithMinimalConfig(TestCase):
     def test_xml_file_error(self):
         # The XML file does not exist
         with self.assertRaises(SystemExit):
@@ -57,18 +57,15 @@ class TestImportXmlCommandWithConfig(TestCase):
             build_xml_stream(xml_tags_fragment="").read()
         )
 
-        with self.assertRaises(FileNotFoundError):
-            # In testing there is no log folder
-            # the command should raise this as an error
-            call_command(
-                "import_xml",
-                built_file,
-                "2",
-                "-a",
-                "tests",
-                "-m",
-                "TestPage",
-            )
+        call_command(
+            "import_xml",
+            built_file,
+            "2",
+            "-a",
+            "tests",
+            "-m",
+            "TestPage",
+        )
 
 
 @override_settings(
@@ -120,20 +117,19 @@ class TestImportXmlCommandCompletes(TestCase):
             build_xml_stream(xml_items_fragment=fragment).read()
         )
 
-        with self.assertRaises(FileNotFoundError):
-            call_command(
-                "import_xml",
-                built_file,
-                "2",
-                "-a",
-                "tests",
-                "-m",
-                "TestPage",
-                "-t",
-                "post",
-                "-s",
-                "publish",
-            )
+        call_command(
+            "import_xml",
+            built_file,
+            "2",
+            "-a",
+            "tests",
+            "-m",
+            "TestPage",
+            "-t",
+            "post",
+            "-s",
+            "publish",
+        )
 
         parent_page = Page.objects.get(id=2)
         imported_pages = parent_page.get_children().all()
