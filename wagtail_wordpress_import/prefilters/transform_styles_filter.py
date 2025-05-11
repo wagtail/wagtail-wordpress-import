@@ -53,7 +53,7 @@ def normalize_style_attrs(soup):
     in filter_bleach_clean() method, they are kept around for any other processing needs.
     """
 
-    elements = soup.findAll(recursive=True)
+    elements = soup.find_all(recursive=True)
 
     for el in elements:
         if el.attrs and el.attrs.get("style"):
@@ -94,7 +94,7 @@ def filter_transform_inline_styles(html, options=None):
         styles_mapping = options["TRANSFORM_STYLES_MAPPING"]
         for filter in styles_mapping:
             filter_transform_styles(
-                soup.findAll(style=filter[0]),
+                soup.find_all(style=filter[0]),
                 soup,
                 import_string(filter[1]),
                 CONF_HTML_TAGS,
@@ -102,12 +102,12 @@ def filter_transform_inline_styles(html, options=None):
     else:
         for filter in styles_mapping:
             filter_transform_styles(
-                soup.findAll(style=filter[0]), soup, filter[1], CONF_HTML_TAGS
+                soup.find_all(style=filter[0]), soup, filter[1], CONF_HTML_TAGS
             )
 
     if conf_transform_html_tags_enabled():
         for filter in conf_transform_html_tags_mapping():
-            tags = soup.findAll(filter[0])
+            tags = soup.find_all(filter[0])
 
             for tag in tags:
                 filter[1](soup, tag)

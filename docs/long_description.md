@@ -12,8 +12,8 @@ A package for Wagtail CMS to import WordPress blog content from an XML file into
 
 The package has been developed and tested with:
 
-- Wagtail: from 2.14 to 2.16
-- Django: 3.1 and 3.2
+- Wagtail: 6.3, 6.4, 7.0
+- Django: 4.2, 5.1, 5.2
 - Postgres and SQLite Databases
 
 ## Module documentation

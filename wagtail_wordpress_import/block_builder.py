@@ -48,7 +48,7 @@ class BlockBuilder:
         removee_tags = config_promote_child_tags["PARENTS_TO_REMOVE"]
 
         for promotee in promotee_tags:
-            promotees = self.soup.findAll(promotee)
+            promotees = self.soup.find_all(promotee)
             for promotee in promotees:
                 if promotee.parent.name in removee_tags:
                     promotee.parent.replace_with(promotee)
@@ -92,7 +92,7 @@ class BlockBuilder:
         If a HTML tag does have child blocks we should parse then inside the
         build_block_* method
         """
-        soup = self.soup.find("body").findChildren(recursive=False)
+        soup = self.soup.find("body").find_all(recursive=False)
         cached_fallback_value = (
             ""  # append fall back content here, by default it's a Rich Text block
         )

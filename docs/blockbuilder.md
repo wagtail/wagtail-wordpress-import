@@ -17,7 +17,7 @@
       - [Custom blockquote](#custom-blockquote)
   - [Extending the package WPImportStreamBlocks](#extending-the-package-wpimportstreamblocks)
 
-All code examples are for a site using Wagtail v3.0+ See [Wagtail release notes](https://docs.wagtail.org/en/stable/releases/3.0.html) for compatibility for Wagtail versions <3.0
+All code examples are for a site using Wagtail v6.3+ See [Wagtail release notes](https://docs.wagtail.org/en/stable/releases/6.3.html)
 
 ## What is a Block Builder?
 
@@ -79,10 +79,6 @@ def build_heading_block(tag):
 Wagtail Block:
 
 ```python
-# The imports below assume you are using Wagtail v3.0+
-
-# Wagtail < 3.0
-# from wagtail.core import blocks
 from wagtail import blocks
 
 
@@ -176,10 +172,6 @@ def build_image_block(tag):
 Wagtail Block
 
 ```python
-# The imports below assume you are using Wagtail v3.0+
-
-# Wagtail < 3.0
-# from wagtail.core import blocks
 from wagtail import blocks
 
 from wagtail.images.blocks import ImageChooserBlock
@@ -210,10 +202,6 @@ def build_block_quote_block(tag):
 Wagtail Block:
 
 ```python
-# The imports below assume you are using Wagtail v3.0+
-
-# Wagtail < 3.0
-# from wagtail.core import blocks
 from wagtail import blocks
 
 
@@ -373,10 +361,6 @@ In your own site you could have a block class like the example below
 Wagtail Block:
 
 ```python
-# The imports below assume you are using Wagtail v3.0+
-
-# Wagtail < 3.0
-# from wagtail.core import blocks
 from wagtail import blocks
 
 
@@ -394,15 +378,8 @@ class MyQuoteBlock(blocks.StructBlock):
 In your own sites StreamField block the block type will need to be available with the name `block_quote_block` for this example but you can call your block type whatever you want.
 
 ```python
-# your Wagtail page model
-# The imports below assume you are using Wagtail v3.0+
-
-# Wagtail < 3.0
-# from wagtail.core.fields import StreamField
 from wagtail.fields import StreamField
 
-# Wagtail < 3.0
-# from wagtail.admin.edit_handlers import StreamFieldPanel
 from wagtail.admin.panels import FieldPanel
 
 
@@ -410,18 +387,10 @@ class MyPage(Page):
     body = StreamField(MyStreamBlocks(), required=False)
     ...
 
-    content_panels = Page.content_panels + [
-        # Wagtail < 3.0
-        # StreamFieldPanel("body")
-        FieldPanel("body")
-    ]
+    content_panels = Page.content_panels + [FieldPanel("body")]
     ...
 
 
-# your Wagtail stream block class
-
-# Wagtail < 3.0
-# from wagtail.core import blocks
 from wagtail import blocks
 
 

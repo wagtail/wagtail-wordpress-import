@@ -61,13 +61,13 @@ class Command(BaseCommand):
 
         tree = ET.parse(file_path)
         wp = "{http://wordpress.org/export/1.2/}"
-        items = tree.getroot()[0].findall("item")
+        items = tree.getroot()[0].find_all("item")
         item_types = []
         item_statuses = []
         for item in items:
-            comments = item.findall(f"{wp}comment")
-            item_type = item.find(f"{wp}post_type").text
-            item_status = item.find(f"{wp}status").text
+            comments = item.find_all(f"{wp}comment")
+            item_type = item.find_all(f"{wp}post_type").text
+            item_status = item.find_all(f"{wp}status").text
             if item_type not in item_types:
                 item_types.append(item_type)
             if item_status not in item_statuses:
@@ -80,11 +80,11 @@ class Command(BaseCommand):
         type_stats = [
             {
                 type: len(
-                    tree.getroot()[0].findall(f".//item/[{wp}post_type='{type}']")
+                    tree.getroot()[0].find_all(f".//item/[{wp}post_type='{type}']")
                 ),
                 "status_counts": {
                     status: len(
-                        tree.getroot()[0].findall(
+                        tree.getroot()[0].find_all(
                             f".//item/[{wp}post_type='{type}'][{wp}status='{status}']"
                         )
                     )
