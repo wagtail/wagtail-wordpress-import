@@ -3,10 +3,8 @@ import os
 from django.core.management import CommandError, call_command
 from django.test import TestCase, override_settings
 
-try:
-    from wagtail.models import Page
-except ImportError:
-    from wagtail.core.models import Page
+
+from wagtail.models import Page
 
 from src.wagtail_wordpress_import.management.commands.reduce_xml import (
     Command as ReduceCmd,
