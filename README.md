@@ -72,8 +72,7 @@ We recommend your page model inherits from the provided WPImportedPageMixin
 from wagtail_wordpress_import.models import WPImportedPageMixin
 
 
-class PostPage(WPImportedPageMixin, Page):
-    ...
+class PostPage(WPImportedPageMixin, Page): ...
 ```
 
 You will need to run `python manage.py makemigrations` and `python manage.py migrate` to add the fields to your page model.
