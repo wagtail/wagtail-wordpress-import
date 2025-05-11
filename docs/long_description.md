@@ -2,6 +2,19 @@
 
 A package for Wagtail CMS to import WordPress blog content from an XML file into Wagtail.
 
+## Installation
+
+```bash
+# Using pip
+pip install wagtail-wordpress-import
+
+# Using uv (recommended)
+uv pip install wagtail-wordpress-import
+
+# For development
+uv pip install -e ".[dev,testing]"
+```
+
 ## Requirements
 
 1. Wagtail CMS Installed following the [initial setup](https://docs.wagtail.io/en/stable/getting_started/index.html)

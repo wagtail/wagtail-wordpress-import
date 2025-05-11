@@ -1,6 +1,7 @@
 # Developer Tooling Commands
 
 - [Developer Tooling Commands](#developer-tooling-commands)
+  - [Development Environment](#development-environment)
   - [Reduce XML command](#reduce-xml-command)
   - [Analyse XML commands](#analyse-xml-commands)
     - [analyze_html_content](#analyze_html_content)
@@ -13,6 +14,27 @@
   - [Databases](#databases)
 
 Wagtail Wordpress Import makes it easy to work with the raw data by providing a set of command line tools.
+
+## Development Environment
+
+For detailed instructions on setting up a development environment, please refer to our [Development Guide](development.md).
+
+The package uses the following development tools:
+
+- **black**: Code formatter
+- **flake8**: Linter
+- **isort**: Import sorter
+- **pre-commit**: Run checks before committing code
+
+To install development dependencies:
+
+```bash
+# Using uv (recommended)
+uv pip install -e ".[dev,testing]"
+
+# Using pip
+pip install -e ".[dev,testing]"
+```
 
 ## Reduce XML command
 
