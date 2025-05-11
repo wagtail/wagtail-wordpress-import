@@ -83,3 +83,4 @@ uv/
 # Local development
 *_local_settings.py
 local_settings.py
+/log
