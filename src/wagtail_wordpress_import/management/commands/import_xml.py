@@ -6,8 +6,6 @@ from django.core.management.base import BaseCommand
 from wagtail_wordpress_import.importers.wordpress import WordpressImporter
 from wagtail_wordpress_import.logger import Logger
 
-LOG_DIR = "log"
-
 
 class Command(BaseCommand):
     help = """Run the import process on all items in the XML file and make
@@ -66,7 +64,22 @@ class Command(BaseCommand):
             )
             exit()
         xml_file_path = self.get_xml_file(f"{options['xml_file']}")
-        logger = Logger(LOG_DIR)
+        log_dir = os.path.join(settings.BASE_DIR, "log")
+        # Empty the log directory if it exists
+        if os.path.exists(log_dir):
+            for file in os.listdir(log_dir):
+                file_path = os.path.join(log_dir, file)
+                try:
+                    if os.path.isfile(file_path):
+                        os.remove(file_path)
+                except Exception as e:
+                    self.stdout.write(
+                        self.style.ERROR(f"Error deleting file {file_path}: {e}")
+                    )
+        else:
+            os.makedirs(log_dir)
+
+        logger = Logger(log_dir)
         importer = WordpressImporter(xml_file_path)
         importer.run(
             page_types=options["type"].split(","),
