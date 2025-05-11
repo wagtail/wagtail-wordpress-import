@@ -52,11 +52,11 @@ setup(
     ],
     extras_require={
         "testing": [
-            "freezegun==0.3.15",
-            "responses>=0.16.0,<0.17.0",
+            "freezegun==1.5.1",
+            "responses==0.25.7",
             "flake8==7.2.0",
             "isort==6.0.1",
-            "black==22.10.0",
+            "black==25.1.0",
         ],
     },
     zip_safe=False,
