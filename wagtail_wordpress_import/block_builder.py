@@ -111,8 +111,9 @@ class BlockBuilder:
                     cached_fallback_value = cached_fallback_function(
                         cached_fallback_value,
                         self.blocks,
+                        logger=self.logger,
                     )  # before building a block write fall back cache to a block
-                self.blocks.append(builder_function(element))
+                self.blocks.append(builder_function(element, logger=self.logger))
             else:
                 if element.text.strip():  # exclude a tag that is empty
                     cached_fallback_value += str(element)
@@ -121,7 +122,7 @@ class BlockBuilder:
                 soup
             ):  # the last tag so just build whats left in the fall back cache
                 cached_fallback_value = cached_fallback_function(
-                    cached_fallback_value, self.blocks
+                    cached_fallback_value, self.blocks, logger=self.logger
                 )
 
         return self.blocks

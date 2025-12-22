@@ -125,26 +125,40 @@ class CaptionHandler(BlockShortcodeHandler):
 
     shortcode_name = "caption"
 
-    def construct_block(self, soup):
+    def construct_block(self, soup, **kwargs):
         """Construct a StreamBlock dict that's passed back to the block builder
 
         soup: <class 'bs4.element.Tag'>
         """
+        logger = kwargs.get("logger")
 
         # Without an image the caption shortcode is useless
         # Here we'll add a raw HTML block to the stream so in admin
         # it can be seen and some action taken.
         image = soup.find("img")
         if not image:
+            if logger:
+                logger.images.append(
+                    {
+                        "id": 0,
+                        "title": "Unknown",
+                        "link": "",
+                        "reason": f"No image found in caption {soup}",
+                    }
+                )
             return {
                 "type": "raw_html",
                 "value": f"<!-- No image found in caption {soup}-->",
             }
-        # TODO: Output this in logging when we have a logger
-        # https://projects.torchbox.com/projects/wordpress-to-wagtail-importer-package/tickets/63
 
         # Parse the image
-        image_file = get_or_save_image(image.attrs["src"])
+        image_file = get_or_save_image(image.attrs["src"], logger=logger)
+
+        if not image_file:
+            return {
+                "type": "raw_html",
+                "value": f"<!-- Image could not be imported in caption {soup}-->",
+            }
 
         # Parse alignment
         if "align" in soup.attrs:

@@ -74,7 +74,7 @@ class TestBlockBuilderRemoveParents(TestCase):
         wagtail_block_captions = output.find_all("wagtail_block_caption")
         for idx, wagtail_block_caption in enumerate(wagtail_block_captions):
             with self.subTest(
-                f"Checking that both wagtail_block_caption tags are top level elements fixture:{idx}"
+                f"Checking that both wagtail_block_caption tags are top level elements fixture: {idx}"
             ):
                 self.assertTrue(
                     wagtail_block_caption.parent.name == self.expected_parent_name

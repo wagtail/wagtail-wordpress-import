@@ -36,7 +36,7 @@ class Command(BaseCommand):
             return xml_file
 
         self.stdout.write(
-            self.style.ERROR(f"The xml file `{xml_file}` cannot be found")
+            self.style.ERROR(f"The xml file '{xml_file}' cannot be found")
         )
         exit()
 

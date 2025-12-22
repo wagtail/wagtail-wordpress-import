@@ -67,7 +67,7 @@ def fetch_url(src, allow_redirects=True):
 # FUNCTIONS FOR IMAGES
 
 
-def image_linker(html):
+def image_linker(html, logger=None):
     """
     params
     ======
@@ -89,7 +89,7 @@ def image_linker(html):
                 image.attrs["src"],
                 getattr(settings, "WAGTAIL_WORDPRESS_IMPORTER_SOURCE_DOMAIN"),
             )
-            saved_image = get_or_save_image(image_src)
+            saved_image = get_or_save_image(image_src, logger=logger)
             if saved_image:
                 image_embed = soup.new_tag("embed")
                 image_embed.attrs["embedtype"] = "image"
@@ -103,7 +103,7 @@ def image_linker(html):
     return str(soup)
 
 
-def get_or_save_image(src):
+def get_or_save_image(src, logger=None):
     image_file_name = get_image_file_name(src)
     existing_image = image_exists(image_file_name)
     if not existing_image:
@@ -128,18 +128,43 @@ def get_or_save_image(src):
             retrieved_image = ImportedImage(
                 file=File(file=temp_image), title=image_file_name
             )
-            retrieved_image.save()
+            try:
+                retrieved_image.save()
+            except Exception as e:
+                if logger:
+                    logger.images.append(
+                        {
+                            "id": 0,
+                            "title": image_file_name,
+                            "link": src,
+                            "reason": f"ImportedImage.save() error: {e}",
+                        }
+                    )
+                else:
+                    print(f"ImportedImage.save() error: {e}")
+                return None
+
             temp_image.close()
             return retrieved_image
         else:
-            print(f"RECEIVED INVALID IMAGE RESPONSE: {src}")
+            if logger:
+                logger.images.append(
+                    {
+                        "id": 0,
+                        "title": image_file_name,
+                        "link": src,
+                        "reason": f"RECEIVED INVALID IMAGE RESPONSE: {src}",
+                    }
+                )
+            else:
+                print(f"RECEIVED INVALID IMAGE RESPONSE: {src}")
     return existing_image
 
 
 # FUNCTIONS FOR DOCUMENTS
 
 
-def document_linker(html):
+def document_linker(html, logger=None):
     """
     params
     ======
@@ -220,7 +245,7 @@ def get_or_save_document(href):
 # STREAMFIELD BLOCKS
 
 
-def build_block_quote_block(tag):
+def build_block_quote_block(tag, **kwargs):
     block_dict = {
         "type": "block_quote",
         "value": {"quote": tag.text.strip(), "attribution": tag.cite},
@@ -228,12 +253,12 @@ def build_block_quote_block(tag):
     return block_dict
 
 
-def build_form_block(tag):
+def build_form_block(tag, **kwargs):
     block_dict = {"type": "raw_html", "value": str(tag)}
     return block_dict
 
 
-def build_heading_block(tag):
+def build_heading_block(tag, **kwargs):
     block_dict = {
         "type": "heading",
         "value": {"importance": tag.name, "text": tag.text},
@@ -241,7 +266,7 @@ def build_heading_block(tag):
     return block_dict
 
 
-def build_iframe_block(tag):
+def build_iframe_block(tag, **kwargs):
     block_dict = {
         "type": "raw_html",
         "value": '<div class="core-custom"><div class="responsive-iframe">{}</div></div>'.format(
@@ -251,7 +276,7 @@ def build_iframe_block(tag):
     return block_dict
 
 
-def build_image_block(tag):
+def build_image_block(tag, **kwargs):
     def get_image_id(src):
         return 1
 
@@ -259,7 +284,7 @@ def build_image_block(tag):
     return block_dict
 
 
-def build_table_block(tag):
+def build_table_block(tag, **kwargs):
     block_dict = {"type": "raw_html", "value": str(tag)}
     return block_dict
 
@@ -275,14 +300,15 @@ def conf_fallback_block():
     )
 
 
-def build_richtext_block_content(html, blocks):
+def build_richtext_block_content(html, blocks, **kwargs):
     """
     image_linker is called to link up and retrive the remote image
     document_linker is called to link up and retrive the remote documents
     filters are called to replace inline shortcodes
     """
-    html = image_linker(html)
-    html = document_linker(html)
+    logger = kwargs.get("logger")
+    html = image_linker(html, logger=logger)
+    html = document_linker(html, logger=logger)
     for inline_shortcode_handler in getattr(
         settings, "WAGTAIL_WORDPRESS_IMPORTER_INLINE_SHORTCODE_HANDLERS", []
     ):
