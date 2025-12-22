@@ -107,7 +107,7 @@ class Logger:
 
     def _write_csv(self, file_suffix, data, fieldnames, header_mapping, row_map=None):
         file_name = f"{self.logdir}/{file_suffix}-{datetime.now().strftime('%Y%m%d-%H%M%S')}.csv"
-        
+
         with open(file_name, "w", newline="") as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow(header_mapping)
