@@ -55,7 +55,7 @@ setup(
             "freezegun==0.3.15",
             "responses>=0.16.0,<0.17.0",
             "flake8==5.0.4",
-            "isort==5.10.1",
+            "isort==5.12.0",
             "black==22.10.0",
         ],
     },
