@@ -76,7 +76,7 @@ class WordpressImporter:
             )
         except LookupError:
             print(
-                f"The app `{kwargs['app_for_pages']}` and/or page model `{kwargs['model_for_pages']}` cannot be found!"
+                f"The app '{kwargs['app_for_pages']}' and/or page model '{kwargs['model_for_pages']}' cannot be found!"
             )
             print(
                 "Check the command line options -a and -m match an existing Wagtail app and Wagtail page model"
